@@ -1,5 +1,6 @@
 # UROP-bootcamp
 Bootcamp exercises 
+
 Last updated: 3/5/19
 
 ## Contains 2 files: 
@@ -8,6 +9,7 @@ Last updated: 3/5/19
 
 ### Data Used: 
 Data from: https://en.wikipedia.org/wiki/Climate_of_New_England
+
 Utilized data at:
 * Vermont (Burlington Intl. Airport)
 * Maine (Portland Intl. Jetport)
