@@ -7,7 +7,7 @@ solns_manual = Float64[]
 
 
 for t in time
-    t = ((sin(2*pi*t)/(2*pi)) + (randn(1)[1] * 0.1))
+    t = ((sin(2*pi*t)/(2*pi)) + (randn(1)[1] * 0.1*time))
     push!(solns_manual, t)
 end
 
