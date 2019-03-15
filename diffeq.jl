@@ -28,6 +28,6 @@ end
 
 
 plot(soln_diffeq,linewidth=1,title="Solution to the ODE",
-     xaxis="Time (s)",yaxis="X(t)")
-plot!(time, solns_manual, linewidth = 1)
-plot!(time, solns_analytical, linewidth = 1)
+     xaxis="Time (s)",yaxis="X(t)", label="diffeq")
+plot!(time, solns_manual, linewidth = 1, label="manual soln")
+plot!(time, solns_analytical, linewidth = 1, label = "analytical soln")
