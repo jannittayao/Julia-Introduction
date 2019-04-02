@@ -14,8 +14,9 @@ x_init = 0
 
 #create time step array
 time = collect(init_t:delta_t:max_t)
-#empty array for X(t) values
+#empty array for X'(t) values
 drvArray = Float64[]
+#empty array for X(t) values
 xArray = Float64[]
 push!(xArray, 0) #adds X(0) value to xArray
 
@@ -23,11 +24,14 @@ push!(xArray, 0) #adds X(0) value to xArray
 #Euler method (efficient)
 let inner_t = t, x = x_init # let deals with for loop scope in julia
     for n = 1:nstep_t
+        #increment t by 0.1
         inner_t += delta_t
 
+        #find X'(t) and add it to drvArray
         drv = f(inner_t)
         push!(drvArray,drv)
 
+        #find X(t) and add it to xArray
         x += drv
         push!(xArray, x)
     end
