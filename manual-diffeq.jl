@@ -5,7 +5,8 @@ function f(t)
     f = cos(2.0*pi*t) + 0.1*rand(1)[1];
 end
 
-function manual_plot(min, max, step)
+# manually calculate diffeq
+function manual_soln(min, max, step)
     #timestep
     delta_t = step
     max_t = max
@@ -21,22 +22,22 @@ function manual_plot(min, max, step)
 
 
     #Euler method (efficient)
-    # let deals with for loop scope in julia
-    let inner_t = t, x = x_init, drv = f(0)
+    let inner_t = t, x = x_init # let deals with for loop scope in julia
         for n = 1:nstep_t
             #increment t by 0.1
             inner_t += delta_t
 
+            #find X'(t) and add it to drvArray
+            drv = f(inner_t)
+            push!(drvArray,drv)
+
             #find X(t) and add it to xArray
             x += drv * delta_t
             push!(xArray, x)
-
-            #update X'(t) with new t
-            drv = f(inner_t)
-
         end
     end
     manualPlotArray = [time, xArray]
+    return manualPlotArray
 end
 
 #Euler method (original + less efficient)

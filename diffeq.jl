@@ -6,7 +6,7 @@ function f(t)
 end
 
 # manually calculate diffeq
-function manual_plot(min, max, step)
+function manual_soln(min, max, step)
     #timestep
     delta_t = step
     max_t = max
@@ -37,27 +37,37 @@ function manual_plot(min, max, step)
         end
     end
     manualPlotArray = [time, xArray]
+    return manualPlotArray
 end
 
-man_plot = manual_plot(0.0, 10, 0.1)
+man_plot = manual_soln(0.0, 10, 0.1)
 
 # using DifferentialEquations package to calculate diffeq
 f(u, p, t) = cos(2*pi*t)
-u0 = 0.0
-tspan = (0.0, 10.0)
-prob = ODEProblem(f, u0, tspan)
-soln_diffeq = solve(prob)
-
-# Calculating diffeq analytically
-solns_analytical = Float64[]
-
-for t in time
-    t = ((sin(2*pi*t)/(2*pi)))
-    push!(solns_analytical, t)
+function diffeq(min, max)
+    u0 = min
+    tspan = (min, max)
+    prob = ODEProblem(f, u0, tspan)
+    soln_diffeq = solve(prob)
+    return soln_diffeq
 end
 
+diffeq_plot = diffeq(0.0, 10.0)
 
-plot(soln_diffeq,linewidth=1,title="Solution to the ODE",
-     xaxis="Time (s)",yaxis="X(t)", label="diffeq")
+# Calculating diffeq analytically
+function analytical_soln(max, step)
+    solns_analytical = Float64[]
+    steps = collect(0:step:max)
+    for step in steps
+        x = ((sin(2*pi*step)/(2*pi)))
+        push!(solns_analytical, x)
+    end
+    return solns_analytical
+end
+
+analytical_plot = analytical_soln(10.0, 0.1)
+
+plot(diffeq_plot,linewidth=1,title="Solution to the ODE",
+      xaxis="Time (s)",yaxis="X(t)", label="diffeq")
 plot!(man_plot[1], man_plot[2], linewidth = 1, label="manual soln")
-plot!(time, solns_analytical, linewidth = 1, label = "analytical soln")
+plot!(time, analytical_plot, linewidth = 1, label = "analytical soln")
