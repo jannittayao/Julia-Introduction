@@ -16,8 +16,6 @@ function manual_plot(min, max, step)
 
     #create time step array
     time = collect(t:delta_t:max_t)
-    #empty array for X'(t) values
-    drvArray = Float64[]
     #empty array for X(t) values
     xArray = Float64[]
     push!(xArray, 0) #adds X(0) value to xArray
