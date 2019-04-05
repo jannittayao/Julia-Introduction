@@ -2,7 +2,7 @@ using DifferentialEquations, Plots
 gr()
 
 function f(t)
-    f = cos(2.0*pi*t) + 0.1*rand(1)[1];
+    f = cos(2.0*pi*t) + 0.1*randn(1)[1];
 end
 
 # manually calculate diffeq
@@ -29,7 +29,6 @@ function manual_soln(min, max, step)
 
             #find X'(t) and add it to drvArray
             drv = f(inner_t)
-            push!(drvArray,drv)
 
             #find X(t) and add it to xArray
             x += drv * delta_t
@@ -70,4 +69,4 @@ analytical_plot = analytical_soln(10.0, 0.1)
 plot(diffeq_plot,linewidth=1,title="Solution to the ODE",
       xaxis="Time (s)",yaxis="X(t)", label="diffeq")
 plot!(man_plot[1], man_plot[2], linewidth = 1, label="manual soln")
-plot!(time, analytical_plot, linewidth = 1, label = "analytical soln")
+plot!(man_plot[1], analytical_plot, linewidth = 1, label = "analytical soln")

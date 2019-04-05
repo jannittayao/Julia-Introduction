@@ -2,7 +2,7 @@ using Plots
 gr()
 
 function f(t)
-    f = cos(2.0*pi*t) + 0.1*rand(1)[1];
+    f = cos(2.0*pi*t) + 0.1*randn(1)[1];
 end
 
 # manually calculate diffeq
@@ -29,7 +29,7 @@ function manual_soln(min, max, step)
 
             #find X'(t) and add it to drvArray
             drv = f(inner_t)
-            push!(drvArray,drv)
+            println(drv)
 
             #find X(t) and add it to xArray
             x += drv * delta_t
@@ -47,7 +47,7 @@ end
 # end
 
 #plot
-testplot = manual_plot(0, 10, 0.1)
+testplot = manual_soln(0, 10, 0.1)
 plot(testplot[1], testplot[2])
 xlabel!("Time (s)")
 ylabel!("X(t)")
